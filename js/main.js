@@ -138,3 +138,103 @@ modal.addEventListener('click', function(event) {
 });
 
 checkAuth();
+
+const restaurants = [
+    {
+        image: 'img/pizza-plus/preview.jpg',
+        name: 'Піца плюс',
+        time: '50 хвилин',
+        stars: 4.5,
+        price: 200,
+        kitchen: 'Піца',
+        products: 'restaurant.html'
+    },
+    {
+        image: 'img/tanuki/preview.jpg',
+        name: 'Танукі',
+        time: '60 хвилин',
+        stars: 4.5,
+        price: 1200,
+        kitchen: 'Суші, роли',
+        products: 'restaurant.html'
+    },
+    {
+        image: 'img/food-band/preview.jpg',
+        name: 'FoodBand',
+        time: '40 хвилин',
+        stars: 4.5,
+        price: 150,
+        kitchen: 'Піца',
+        products: 'restaurant.html'
+    },
+    {
+        image: 'img/palki-skalki/preview.jpg',
+        name: 'Ikigai',
+        time: '55 хвилин',
+        stars: 4.5,
+        price: 250,
+        kitchen: 'Піца',
+        products: 'restaurant.html'
+    },
+    {
+        image: 'img/gusi-lebedi/preview.jpg',
+        name: 'Пузата хата',
+        time: '75 хвилин',
+        stars: 4.5,
+        price: 300,
+        kitchen: 'Українські страви',
+        products: 'restaurant.html'
+    },
+    {
+        image: 'img/pizza-burger/preview.jpg',
+        name: 'PizzaBurger',
+        time: '45 хвилин',
+        stars: 4.5,
+        price: 700,
+        kitchen: 'Піца',
+        products: 'restaurant.html'
+    }
+];
+
+const cardsRestaurants = document.querySelector('.cards-restaurants');
+
+function createCardRestaurant(restaurant) {
+    const { image, name, time, stars, price, kitchen, products } = restaurant;
+
+    const card = `
+        <a href="${products}" class="card card-restaurant">
+            <img src="${image}" alt="image" class="card-image"/>
+            <div class="card-text">
+                <div class="card-heading">
+                    <h3 class="card-title">${name}</h3>
+                    <span class="card-tag tag">${time}</span>
+                </div>
+                <div class="card-info">
+                    <div class="rating">${stars}</div>
+                    <div class="price">від ${price} ₴</div>
+                    <div class="category">${kitchen}</div>
+                </div>
+            </div>
+        </a>
+    `;
+
+    cardsRestaurants.insertAdjacentHTML('beforeend', card);
+}
+
+if (cardsRestaurants) {
+    cardsRestaurants.textContent = '';
+    restaurants.forEach(createCardRestaurant);
+
+    cardsRestaurants.addEventListener('click', function(event) {
+        const target = event.target;
+        const restaurantCard = target.closest('.card-restaurant');
+
+        if (restaurantCard) {
+            if (!login) {
+                event.preventDefault();
+                toggleModalAuth();
+            } else {
+            }
+        }
+    });
+}
